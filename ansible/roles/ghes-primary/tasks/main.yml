@@ -1,0 +1,44 @@
+---
+- name: Wait until host is ready
+  block:
+
+  - name: Wait for admin port ({{ ghe_admin_port }}) to come up
+    # http://docs.ansible.com/ansible/wait_for_module.html
+    wait_for:
+      host: "{{ ghe_host }}"
+      port: "{{ ghe_admin_port }}"
+      delay: 10
+      timeout: 300
+      state: started
+    changed_when: false
+
+  - name: Wait for http status 200
+    # https://docs.ansible.com/ansible/uri_module.html
+    uri:
+      url: "https://{{ ghe_host }}:{{ ghe_admin_port }}"
+      validate_certs: no
+    register: http_result
+    #ignore_errors: true
+    until: http_result.status == 200
+    retries: 100
+    delay: 10
+    changed_when: false
+
+  tags:
+    - always
+
+- name: Setup configuration
+  include_tasks: configuration-setup.yml
+  tags:
+    - setup
+
+- name: Modify configuration
+  include_tasks: configuration-modify.yml
+  tags:
+    - modify
+
+- name: Apply configuration
+  include_tasks: configuration-apply.yml
+  tags:
+    - setup
+    - modify

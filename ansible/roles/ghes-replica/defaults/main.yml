@@ -1,0 +1,6 @@
+---
+github_host: github.example.com
+github_host_ip: 0.0.0.0
+
+# Default check Replication setup
+verify_replication: false

@@ -1,0 +1,7 @@
+---
+ghe_host: 0.0.0.0
+ghe_admin_port: 8443
+ghe_admin_password: PassW0rd!
+
+ghe_license_path: "{{ role_path }}/files/license.example.ghl"
+ghe_settings_path: "{{ role_path }}/files/settings.example.json"

@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Terraform
+      # http://docs.ansible.com/ansible/terraform_module.html
+      terraform:
+        project_path: "../../terraform"
+        variables_file: "../../terraform/vars/{{ terraform_workspace }}.tfvars"
+        state: absent
+        workspace: "{{ terraform_workspace }}"

@@ -1,0 +1,7 @@
+exclude_paths: []
+parseable: true
+quiet: true
+skip_list:
+  - '306'
+use_default_rules: true
+verbosity: 1

@@ -1,0 +1,8 @@
+---
+terraform_workspace: default
+
+ghe_admin_password: PASSWORD
+ghe_admin_token: TOKEN
+
+ghe_license_path: "/path/to/license.ghl"
+ghe_settings_path: "/path/to/settings.json"

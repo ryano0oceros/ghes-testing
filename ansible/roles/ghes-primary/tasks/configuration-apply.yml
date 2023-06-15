@@ -1,0 +1,37 @@
+---
+- name: Apply configuration
+  block:
+
+  - name: Run configuration process for settings to take effect
+    # https://docs.ansible.com/ansible/uri_module.html
+    # https://developer.github.com/enterprise/v3/enterprise-admin/management_console/#start-a-configuration-process
+    uri:
+      url: "https://{{ ghe_host }}:{{ ghe_admin_port }}/setup/api/configure"
+      method: POST
+      return_content: yes
+      user: "api_key"
+      password: "{{ ghe_admin_password }}"
+      force_basic_auth: yes
+      validate_certs: no
+      status_code: 202
+
+  - name: Ensure ghe-config-apply is completed
+    # https://docs.ansible.com/ansible/uri_module.html
+    # https://developer.github.com/enterprise/v3/enterprise-admin/management_console/#check-configuration-status
+    uri:
+      url: "https://{{ ghe_host }}:{{ ghe_admin_port }}/setup/api/configcheck"
+      method: GET
+      return_content: yes
+      user: "api_key"
+      password: "{{ ghe_admin_password }}"
+      force_basic_auth: yes
+      validate_certs: no
+    register: configcheck
+    until: configcheck.status == 200 and configcheck.json.status == "success"
+    retries: 100
+    delay: 10
+    notify: Remove temporary license and settings files
+
+  # https://docs.ansible.com/ansible/latest/dev_guide/developing_program_flow_modules.html#no-log
+  # we do not log to not expose the admin password
+  no_log: true

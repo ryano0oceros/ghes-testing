@@ -1,0 +1,13 @@
+---
+- name: Upload a license for the first time
+  # http://docs.ansible.com/ansible/shell_module.html
+  # https://developer.github.com/enterprise/v3/enterprise-admin/management_console/#modify-settings
+  shell: |
+    curl -L -k -X POST \
+      "https://{{ ghe_host }}:{{ ghe_admin_port }}/setup/api/start" \
+      -F "license=@{{ ghe_license_path }}" \
+      -F "password={{ ghe_admin_password }}" \
+      -F "settings=<{{ ghe_settings_path }}"
+  # https://docs.ansible.com/ansible/latest/dev_guide/developing_program_flow_modules.html#no-log
+  # we do not log to not expose the admin password
+  no_log: true

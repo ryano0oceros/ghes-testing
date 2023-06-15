@@ -1,0 +1,19 @@
+---
+- name: Terraform
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Terraform apply
+      # http://docs.ansible.com/ansible/terraform_module.html
+      terraform:
+        project_path: "../../terraform"
+        variables_file: "../../terraform/vars/{{ terraform_workspace }}.tfvars"
+        state: present
+        workspace: "{{ terraform_workspace }}"
+      register: tf
+      # https://docs.ansible.com/ansible/latest/dev_guide/developing_program_flow_modules.html#no-log
+      # we do not log to not expose sensitive data
+      no_log: true
+
+# TODO

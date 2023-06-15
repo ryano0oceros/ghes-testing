@@ -1,0 +1,16 @@
+{
+  "enterprise": {
+    "subdomain_isolation": false,
+    "auth_mode": "default",
+    "private_mode": true,
+    "signup_enabled": false,
+    "ntp": {
+      "primary_server": "0.pool.ntp.org",
+      "secondary_server": "1.pool.ntp.org"
+    },
+    "pages": {
+      "enabled": false
+    },
+    "public_pages": false
+  }
+}
