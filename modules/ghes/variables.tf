@@ -42,22 +42,22 @@ variable "tags" {
 
 variable "public_key_path" {
   description = "The path to the public key"
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "~/.ssh/id_ed25519.pub"
 }
 
 variable "ghes_region" {
   description = "The AWS region"
-  default     = ""
+  default     = "us-east-1"
 }
 
 variable "ghes_azs" {
   description = "A list of availability zones in the region"
-  default     = []
+  default     = [us-east-1a, us-east-1b]
 }
 
 variable "ghes_version" {
   description = "(Optional) GitHub Enterprise Server version to provision"
-  default     = "2.19.3"
+  default     = "3.8.4"
 }
 
 variable "ghes_instance_type" {

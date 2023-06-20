@@ -1,6 +1,5 @@
 # https://www.terraform.io/docs/providers/aws/index.html
 provider "aws" {
-  version                 = "~> 2.42"
   region                  = var.aws_region
   profile                 = var.aws_profile
   shared_credentials_file = var.aws_credantials_file
