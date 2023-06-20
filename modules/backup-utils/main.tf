@@ -1,8 +1,8 @@
 # https://www.terraform.io/docs/providers/aws/index.html
 provider "aws" {
-  region                  = var.aws_region
-  profile                 = var.aws_profile
-  shared_credentials_file = var.aws_credantials_file
+  region                    = var.aws_region
+  profile                   = var.aws_profile
+  shared_credentials_files  = var.aws_credantials_file
 }
 
 resource "aws_security_group" "security_group" {
